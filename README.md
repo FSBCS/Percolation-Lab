@@ -199,3 +199,7 @@ You may not collaborate with AI on this project in any way.
 You may look things up, but you must not simply copy and paste things without understanding them. I would advise you not to look up the answers to this lab, although they are out there. In any event, if I doubt that your code is your code, I will ask you to explain it to me. Code you cannot adequately explain does not count as your code.
 
 You may work together, but please doe not just copy each other without understanding. And definitely don't copy code you haven't tested.
+
+## Acknolwedgments
+
+This lab is based on the Princeton Algs4 lab. The original description is available [at this assignment page](https://coursera.cs.princeton.edu/algs4/assignments/percolation/specification.php).
