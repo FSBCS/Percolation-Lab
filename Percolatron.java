@@ -99,6 +99,15 @@ public class Percolatron extends JPanel {
         this.perc = new Percolation(n);   // failures propagate to show()
         shuffleOrder();
 
+        // Press "s" to save the grid as a PNG (handy for documentation)
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "saveImage");
+        getActionMap().put("saveImage", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveImage();
+            }
+        });
+
         JButton resetButton = new JButton("Reset");
         runButton.addActionListener(e -> toggleRun());
         stepButton.addActionListener(e -> step());
@@ -358,6 +367,26 @@ public class Percolatron extends JPanel {
     // ===================================================================
     // The grid: drawing and mouse input
     // ===================================================================
+
+    /** Writes the grid to percolatron-n-k.png in the working directory (first unused k). */
+    private void saveImage() {
+        try {
+            java.awt.image.BufferedImage img = new java.awt.image.BufferedImage(
+                    grid.getWidth(), grid.getHeight(), java.awt.image.BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = img.createGraphics();
+            grid.paint(g);
+            g.dispose();
+            java.io.File f;
+            int k = 1;
+            do {
+                f = new java.io.File("percolatron-" + n + "-" + k++ + ".png");
+            } while (f.exists());
+            javax.imageio.ImageIO.write(img, "png", f);
+            System.out.println("Saved " + f.getAbsolutePath());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private class GridPanel extends JPanel {
 
